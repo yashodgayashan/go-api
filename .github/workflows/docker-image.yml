@@ -38,7 +38,7 @@ jobs:
           DOCKER_IMAGE_TAG: ${{github.sha}}
           GIT_SHA: ${{github.sha}}
           API_DEFINITION_PATH: "/"
-          DOCKER_IMAGE_NAME: ${DOCKER_USER}/${REPO_NAME}:${TAG}
+          DOCKER_IMAGE_NAME: ${{secrets.DOCKER_USER}}/${{ github.event.repository.name }}
         run: |
           curl --location --request POST \
           'https://app.preview-dv.choreo.dev/v1/webhook/byoci/deploy/container?token='${TOKEN} \
@@ -51,5 +51,5 @@ jobs:
             "token": "'${TOKEN}'",
             "git_hash": "'${GIT_SHA}'",
             "api_definition_path": "'${API_DEFINITION_PATH}'",
-            "image_registries": [{"registry_id":"2c69b46b-6654-4aa4-9600-7e56e36583a4","image_repository_name":"'$DOCKER_USER'/'$REPO_NAME'"}]
+            "image_registries": [{"registry_id":"2c69b46b-6654-4aa4-9600-7e56e36583a4","image_repository_name":"'${DOCKER_USER}'/'${REPO_NAME}'"}]
           }'
