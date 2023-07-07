@@ -31,6 +31,9 @@ jobs:
           TAG: ${{github.sha}}
       - name: Choreo Deploy
         env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          REPO_NAME: ${{ github.event.repository.name }}
+          TAG: ${{github.sha}}
           TOKEN: ${{secrets.TOKEN}}
           DOCKER_IMAGE_TAG: ${{github.sha}}
           GIT_SHA: ${{github.sha}}
