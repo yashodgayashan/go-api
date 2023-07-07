@@ -2,46 +2,46 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: docker login
-      env:
-        DOCKER_USER: ${{secrets.DOCKER_USER}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
-    - name: Build the Docker image
-      env:
-        DOCKER_USER: ${{secrets.DOCKER_USER}}
-        REPO_NAME: ${{ github.event.repository.name }} 
-        TAG: ${{github.sha}}
-      run: docker build . --file Dockerfile --tag ${DOCKER_USER}/${REPO_NAME}:${TAG}
-    - name: Docker Push
-      run: docker push ${DOCKER_USER}/${REPO_NAME}:${TAG}
-      env:
-        DOCKER_USER: ${{secrets.DOCKER_USER}}
-        REPO_NAME: ${{ github.event.repository.name }} 
-        TAG: ${{github.sha}}
-    - name: Choreo Deploy
-      run: |
-        curl --location --request POST \
-        'https://app.preview-dv.choreo.dev/v1/webhook/byoci/deploy/container?token=<TOKEN>' \
-        --header 'Content-Type: application/json' \
-        --data-raw '{
-          "container_id": "962d194f-9225-4fd7-aa84-de3e6350915d",
-          "release_id": "df6baaf9-3208-499e-92b0-f3f59ecceee6",
-          "tag": "<DOCKER-IMAGE-TAG>",
-          "image_name": "<DOCKER-IMAGE-NAME>",
-          "token": "<TOKEN>",
-          "git_hash": "<GIT-SHA-FOR-THE-BUILD>",
-          "api_definition_path": "<API-DEFINITION-PATH>",
-          "image_registries": [{"registry_id":"2c69b46b-6654-4aa4-9600-7e56e36583a4","image_repository_name":"<REPO-NAME>"}]
-        }'
+      - uses: actions/checkout@v2
+      - name: docker login
+        env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+          TOKEN: ${{secrets.TOKEN}}
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Build the Docker image
+        env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          REPO_NAME: ${{ github.event.repository.name }}
+          TAG: ${{github.sha}}
+        run: docker build . --file Dockerfile --tag ${DOCKER_USER}/${REPO_NAME}:${TAG}
+      - name: Docker Push
+        run: docker push ${DOCKER_USER}/${REPO_NAME}:${TAG}
+        env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          REPO_NAME: ${{ github.event.repository.name }}
+          TAG: ${{github.sha}}
+      - name: Choreo Deploy
+        run: |
+          curl --location --request POST \
+          'https://app.preview-dv.choreo.dev/v1/webhook/byoci/deploy/container?token=${TOKEN}' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+            "container_id": "962d194f-9225-4fd7-aa84-de3e6350915d",
+            "release_id": "df6baaf9-3208-499e-92b0-f3f59ecceee6",
+            "tag": "${{github.sha}}",
+            "image_name": "${DOCKER_USER}/${REPO_NAME}:${TAG}",
+            "token": "${TOKEN}",
+            "git_hash":"${{ github.sha }}",
+            "api_definition_path": "/",
+            "image_registries": [{"registry_id":"2c69b46b-6654-4aa4-9600-7e56e36583a4","image_repository_name":"${REPO_NAME}"}]
+          }'
