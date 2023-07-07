@@ -32,7 +32,7 @@ jobs:
       - name: Choreo Deploy
         run: |
           curl --location --request POST \
-          'https://app.preview-dv.choreo.dev/v1/webhook/byoci/deploy/container?token=<TOKEN>' \
+          'https://app.preview-dv.choreo.dev/v1/webhook/byoci/deploy/container?token=<TOKEN2>' \
           --header 'Content-Type: application/json' \
           --data-raw '{
             "container_id": "962d194f-9225-4fd7-aa84-de3e6350915d",
