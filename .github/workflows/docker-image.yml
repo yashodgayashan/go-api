@@ -35,10 +35,8 @@ jobs:
           REPO_NAME: ${{ github.event.repository.name }}
           TAG: ${{github.sha}}
           TOKEN: ${{secrets.TOKEN}}
-          DOCKER_IMAGE_TAG: ${{github.sha}}
           GIT_SHA: ${{github.sha}}
-          API_DEFINITION_PATH: "/"
-          DOCKER_IMAGE_NAME: "${{secrets.DOCKER_USER}}/${{ github.event.repository.name }}:${{github.sha}}"
+          DOCKER_IMAGE_NAME: ${{secrets.DOCKER_USER}}/${{ github.event.repository.name }}:${{github.sha}}
         run: |
           curl --location --request POST \
           'https://app.preview-dv.choreo.dev/v1/webhook/byoci/deploy/container?token='${TOKEN} \
