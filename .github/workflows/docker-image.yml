@@ -48,5 +48,5 @@ jobs:
             "token": "'${TOKEN}'",
             "git_hash": "'${GIT_SHA}'",
             "registry_id":"2c69b46b-6654-4aa4-9600-7e56e36583a4",
-            "image_url": "registry.docker.com/'${REPO_NAME}'/'${DOCKER_IMAGE_NAME}':'${TAG}'"
+            "image_url": "registry.docker.com/'${DOCKER_IMAGE_NAME}':'${TAG}'"
           }'
