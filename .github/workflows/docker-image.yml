@@ -35,18 +35,14 @@ jobs:
           REPO_NAME: ${{ github.event.repository.name }}
           TAG: ${{github.sha}}
           TOKEN: ${{secrets.TOKEN}}
-          GIT_SHA: ${{github.sha}}
           DOCKER_IMAGE_NAME: ${{secrets.DOCKER_USER}}/${{ github.event.repository.name }}
         run: |
           curl --location --request POST \
           'https://app.preview-dv.choreo.dev/v1/webhook/byoci/deploy/container?token='${TOKEN} \
           --header 'Content-Type: application/json' \
           --data-raw '{
-            "component_id": "ad71d7be-5520-4af6-8b93-40091275f1c1",
-            "container_id": "962d194f-9225-4fd7-aa84-de3e6350915d",
-            "release_id": "df6baaf9-3208-499e-92b0-f3f59ecceee6",
+            "component_id": "1944d2f2-9444-4179-8dae-593d7186715d",
+            "version_id": "58de9252-dac9-434b-a282-4a87ff7db6c1",
             "token": "'${TOKEN}'",
-            "git_hash": "'${GIT_SHA}'",
-            "registry_id":"2c69b46b-6654-4aa4-9600-7e56e36583a4",
             "image_url": "registry.docker.com/'${DOCKER_IMAGE_NAME}':'${TAG}'"
           }'
