@@ -38,11 +38,11 @@ jobs:
           DOCKER_IMAGE_NAME: ${{secrets.DOCKER_USER}}/${{ github.event.repository.name }}
         run: |
           curl --location --request POST \
-          'https://app.preview-dv.choreo.dev/v1/webhook/byoci/deploy/container?token='${TOKEN} \
+          'https://apis.preview-dv.choreo.dev/devops/1.0.0/external-ci/deploy' \
           --header 'Content-Type: application/json' \
           --data-raw '{
             "component_id": "1944d2f2-9444-4179-8dae-593d7186715d",
             "version_id": "58de9252-dac9-434b-a282-4a87ff7db6c1",
             "token": "'${TOKEN}'",
-            "image_url": "registry.docker.com/'${DOCKER_IMAGE_NAME}':'${TAG}'"
+            "image": "registry.docker.com/'${DOCKER_IMAGE_NAME}':'${TAG}'"
           }'
