@@ -41,8 +41,8 @@ jobs:
           'https://apis.preview-dv.choreo.dev/devops/1.0.0/external-ci/deploy' \
           --header 'Content-Type: application/json' \
           --data-raw '{
-            "component_id": "3b4810d8-217e-4706-b437-cb7bb9a49c66",
-            "version_id": "88e8d654-8f9d-4d36-b8bd-1621fcc9c449",
+            "component_id": "e25a95b3-a5ee-4b58-86a8-f5a2e027ba7d",
+            "version_id": "ffb71bf5-92c4-4e53-892b-933569142381",
             "token": "'${TOKEN}'",
             "image": "registry.docker.com/'${DOCKER_IMAGE_NAME}':'${TAG}'"
           }'
