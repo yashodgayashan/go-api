@@ -29,20 +29,20 @@ jobs:
           DOCKER_USER: ${{secrets.DOCKER_USER}}
           REPO_NAME: ${{ github.event.repository.name }}
           TAG: ${{github.sha}}
-      # - name: Choreo Deploy
-      #   env:
-      #     DOCKER_USER: ${{secrets.DOCKER_USER}}
-      #     REPO_NAME: ${{ github.event.repository.name }}
-      #     TAG: ${{github.sha}}
-      #     TOKEN: ${{secrets.TOKEN}}
-      #     DOCKER_IMAGE_NAME: ${{secrets.DOCKER_USER}}/${{ github.event.repository.name }}
-      #   run: |
-      #     curl --location --request POST \
-      #     'https://apis.preview-dv.choreo.dev/devops/1.0.0/external-ci/deploy' \
-      #     --header 'Content-Type: application/json' \
-      #     --data-raw '{
-      #       "component_id": "32f5fd9f-23e9-48fb-9f25-9fbd0f00959d",
-      #       "version_id": "baadb0c4-6dd8-4b75-8fff-412e2f98aef3",
-      #       "token": "'${TOKEN}'",
-      #       "image": "registry.docker.com/'${DOCKER_IMAGE_NAME}':'${TAG}'"
-      #     }'
+      - name: Choreo Deploy
+        env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          REPO_NAME: ${{ github.event.repository.name }}
+          TAG: ${{github.sha}}
+          TOKEN: ${{secrets.TOKEN}}
+          DOCKER_IMAGE_NAME: ${{secrets.DOCKER_USER}}/wipro
+        run: |
+          curl --location --request POST \
+          'https://apis.preview-dv.choreo.dev/devops/1.0.0/external-ci/deploy' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+            "component_id": "bf7d9d04-0c95-4ede-995e-b40f51e8ced1",
+            "version_id": "dacf2c8b-6e2b-41b7-8e7b-e6887a4cb250",
+            "token": "'${TOKEN}'",
+            "image": "registry.docker.com/'${DOCKER_IMAGE_NAME}':'${TAG}'"
+          }'
