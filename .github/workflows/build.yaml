@@ -47,8 +47,8 @@ jobs:
         'https://apis.preview-dv.choreo.dev/devops/1.0.0/external-ci/deploy' \
         --header 'Content-Type: application/json' \
         --data-raw '{
-          "component_id": "bf7d9d04-0c95-4ede-995e-b40f51e8ced1",
-          "version_id": "dacf2c8b-6e2b-41b7-8e7b-e6887a4cb250",
+          "component_id": "c46972fb-d7cb-485e-9df4-5747510edebb",
+          "version_id": "6e4d65c8-8509-43ef-83b9-e54e0640a8db",
           "token": "'${TOKEN}'",
           "image": "us-east1-docker.pkg.dev/'${GOOGLE_PROJECT}'/pdp-test4/go-demo:'${TAG}'"
         }'
