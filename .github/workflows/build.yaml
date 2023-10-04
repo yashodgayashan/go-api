@@ -1,5 +1,7 @@
-name: Deploy Nginx
 runs-on: self-hosted
+
+name: Deploy Nginx
+
 on:
   push:
     branches: ["main"]
