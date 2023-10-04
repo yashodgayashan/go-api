@@ -13,6 +13,11 @@ jobs:
     runs-on: self-hosted
     steps:
 
+    - name: Get Azure VM Name
+      run: |
+        VM_NAME=$(curl -H Metadata:true --noproxy "*" "http://169.254.169.254/metadata/instance?api-version=2021-01-01" | jq -r .compute.name)
+        echo "VM_NAME=$VM_NAME" >> $GITHUB_ENV
+        echo $VM_NAME
     - name: code checkout
       uses: actions/checkout@v2
 
