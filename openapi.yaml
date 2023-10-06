@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  title: Greeting Service
+  title: Greeting Service v2
   version: 1.0.0
 paths:
   /greeter/greet:
