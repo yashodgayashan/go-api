@@ -1,0 +1,19 @@
+name: PR check workflow
+
+on:
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  - test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Echo hello world
+        run: |
+          echo "Hello world"
+      - name: Install some thing
+        run: | 
+          apt-get install npm
+
+        
