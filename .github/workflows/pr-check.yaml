@@ -2,10 +2,10 @@ name: PR check workflow
 
 on:
   pull_request:
-    branches: ["*"]
+    branches: ["main"]
 
 jobs:
-  - test:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,5 +15,6 @@ jobs:
       - name: Install some thing
         run: | 
           apt-get install npm
+   
 
         
