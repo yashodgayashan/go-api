@@ -14,4 +14,4 @@ go run main.go
 ```
 
 ### Trigger
-test-1
+test-1-2-3
