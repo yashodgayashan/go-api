@@ -12,8 +12,15 @@ jobs:
       - name: Echo hello world
         run: |
           echo "Hello world"
-      - name: Install some thing
-        run: | 
+      - uses: actions/checkout@v2
+      - name: build the docker image
+        env:
+          TAG: ${{github.sha}}
+        run: |
+          docker build -t yashodperera/go-demo:$TAG .
+      - name: Complete Flow
+        run: |
+          echo"completed"
           apt-get install npm
    
 
